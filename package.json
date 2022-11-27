@@ -1,9 +1,9 @@
 {
-  "name": "mrm-preset-zardoy",
+  "name": "mrm-preset",
   "version": "0.0.0-dev",
-  "author": "Vitaly Turovsky <vital2580@icloud.com>",
+  "author": "Ilya Golovin",
   "license": "MIT",
-  "files": null,
+  "files": [],
   "bin": {
     "mrm": "bin.js"
   },
