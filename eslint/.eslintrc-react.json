@@ -1,7 +1,3 @@
 {
-    "extends": "zardoy/react",
-    "plugins": [
-        "eslint-plugin-react",
-        "eslint-plugin-react-hooks"
-    ]
+    "plugins": ["eslint-plugin-react", "eslint-plugin-react-hooks"]
 }
