@@ -1,4 +1,4 @@
-import { install, packageJson } from 'mrm-core'
+import { install, makeDirs } from 'mrm-core'
 import fsExtra from 'fs-extra'
 import { ensureGitignore, ensureLicense } from '../util'
 
@@ -7,12 +7,11 @@ module.exports = () => {
     ensureGitignore()
     if (!fsExtra.existsSync('index.html')) require('../html/index')()
     require('../pkg/index')()
-    require('../ts/index')({ preset: 'react' })
+    require('../ts/index')({ preset: 'tsconfig' })
 
-    install(['vite', '@zardoy/vit'], {
+    install(['vite'], {
         pnpm: true,
     })
-    packageJson().prependScript('start', 'vit').prependScript('build', 'vit build').save()
-    require('../cssinjs/index')()
-    require('../eslint/index')({ isReact: true })
+    require('../cssinjs/index')('default')
+    require('../eslint/index')({ isReact: false })
 }
