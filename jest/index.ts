@@ -1,4 +1,4 @@
-import fsExtra from 'fs-extra'
+import * as fsExtra from 'fs-extra'
 import { install, lines, packageJson } from 'mrm-core'
 import { join } from 'path'
 

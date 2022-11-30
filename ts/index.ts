@@ -1,6 +1,6 @@
 import { install, lines, file, packageJson } from 'mrm-core'
 import { TsConfigJson } from 'type-fest'
-import fsExtra from 'fs-extra'
+import * as fsExtra from 'fs-extra'
 import { hasVscodeFramework } from '../util'
 
 const presets = {

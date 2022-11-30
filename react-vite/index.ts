@@ -1,5 +1,5 @@
 import { install, packageJson } from 'mrm-core'
-import fsExtra from 'fs-extra'
+import * as fsExtra from 'fs-extra'
 import { ensureGitignore, ensureLicense } from '../util'
 
 module.exports = () => {

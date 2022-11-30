@@ -1,5 +1,5 @@
 import { lines } from 'mrm-core'
-import fsExtra from 'fs-extra'
+import * as fsExtra from 'fs-extra'
 import { join } from 'path'
 import { hasVscodeFramework } from '../util'
 

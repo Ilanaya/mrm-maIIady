@@ -1,7 +1,7 @@
 import { file, install, packageJson } from 'mrm-core'
 import { basename } from 'path'
 import { PackageJson } from 'type-fest'
-import fsExtra from 'fs-extra'
+import * as fsExtra from 'fs-extra'
 import { capitalCase } from 'change-case'
 import { copyAllFiles, ensureGitignore, ensureLicense, ensureTs } from '../util'
 import { modifyTsConfigJsonFile } from 'modify-json-file'

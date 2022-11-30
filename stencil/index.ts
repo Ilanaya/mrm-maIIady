@@ -1,4 +1,4 @@
-import fsExtra from 'fs-extra'
+import * as fsExtra from 'fs-extra'
 import { install, packageJson } from 'mrm-core'
 
 module.exports = () => {
