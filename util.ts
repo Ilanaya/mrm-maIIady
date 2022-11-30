@@ -5,8 +5,7 @@ import { join } from 'path'
 import { readPackageJsonFile } from 'typed-jsonfile'
 
 export const copyAllFiles = (__dirname: string, patchFiles: Record<string, (contents: string) => string | undefined> = {}, copySet: string[] | null = null) => {
-    const files =
-        copySet ?? fs.readdirSync(__dirname).filter(name => !fs.lstatSync(join(__dirname, name)).isDirectory() && !oneOf(name, 'index.ts', 'index.js'))
+    const files = copySet ?? fs.readdirSync(__dirname).filter(name => !fs.lstatSync(join(__dirname, name)).isDirectory() && !oneOf(name, 'index.ts', 'index.js'))
     for (const file of files) {
         const patchFn = patchFiles[file] ?? (contents => contents)
         const contents = patchFn(fs.readFileSync(join(__dirname, file), 'utf-8'))

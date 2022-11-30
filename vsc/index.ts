@@ -20,8 +20,7 @@ module.exports = () => {
             {
                 name,
                 displayName: capitalCase(name),
-                // have no idea how to retrive name like that
-                publisher: 'zardoy',
+                publisher: 'maIIady',
                 version: '0.0.0-dev',
                 license: 'MIT',
                 categories: null, // let IDE highlight incorrect type so user specifies correct one

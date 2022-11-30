@@ -29,7 +29,6 @@ module.exports = async ({ preset }) => {
         pnpm: true,
     })
     const tsconfig: TsConfigJson = {
-        extends: `@zardoy/tsconfig/${preset}`,
         compilerOptions: {},
         include: ['src'],
     }

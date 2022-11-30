@@ -49,7 +49,7 @@ async function main() {
     const tasks = argv._
 
     const binaryPath = process.env._
-    const binaryName = binaryPath && binaryPath.endsWith('/npx') ? 'npx mrm' : 'mrm'
+    const binaryName = binaryPath?.endsWith('/npx') ? 'npx mrm' : 'mrm'
 
     // Preset
     const preset = argv.preset || 'default'
@@ -146,14 +146,9 @@ Note that when a preset is specified no default search locations are used.`,
         const commands = EXAMPLES.map(x => x[0] + x[1])
         const commandsWidth = longest(commands).length
         return EXAMPLES.map(([command, opts, description]) =>
-            [
-                '   ',
-                kleur.bold(binaryName),
-                kleur.cyan(command),
-                kleur.yellow(opts),
-                padEnd('', commandsWidth - (command + opts).length),
-                description && `# ${description}`,
-            ].join(' '),
+            ['   ', kleur.bold(binaryName), kleur.cyan(command), kleur.yellow(opts), padEnd('', commandsWidth - (command + opts).length), description && `# ${description}`].join(
+                ' ',
+            ),
         ).join('\n')
     }
 
@@ -165,7 +160,7 @@ Note that when a preset is specified no default search locations are used.`,
         return names
             .map(name => {
                 const description = Array.isArray(allTasks[name]) ? `Runs ${listify(allTasks[name])}` : allTasks[name]
-                return '    ' + kleur.cyan(padEnd(name, nameColWidth)) + '  ' + description
+                return `    ${kleur.cyan(padEnd(name, nameColWidth))}  ${description}`
             })
             .join('\n')
     }
