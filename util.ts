@@ -1,40 +1,38 @@
 import { oneOf } from '@zardoy/utils'
-import fs from 'fs'
+import * as fsExtra from 'fs-extra'
 import { lines } from 'mrm-core'
 import { join } from 'path'
 import { readPackageJsonFile } from 'typed-jsonfile'
 
 export const copyAllFiles = (__dirname: string, patchFiles: Record<string, (contents: string) => string | undefined> = {}, copySet: string[] | null = null) => {
-    const files = copySet ?? fs.readdirSync(__dirname).filter(name => !fs.lstatSync(join(__dirname, name)).isDirectory() && !oneOf(name, 'index.ts', 'index.js'))
+    const files = copySet ?? fsExtra.readdirSync(__dirname).filter(name => !fsExtra.lstatSync(join(__dirname, name)).isDirectory() && !oneOf(name, 'index.ts', 'index.js'))
     for (const file of files) {
         const patchFn = patchFiles[file] ?? (contents => contents)
-        const contents = patchFn(fs.readFileSync(join(__dirname, file), 'utf-8'))
+        const contents = patchFn(fsExtra.readFileSync(join(__dirname, file), 'utf-8'))
         if (contents === undefined) continue
         lines(file).set([contents]).save()
     }
 }
 
 export const ensureLicense = () => {
-    if (fs.existsSync('LICENSE') || fs.existsSync('LICENSE.md')) return
+    if (fsExtra.existsSync('LICENSE') || fsExtra.existsSync('LICENSE.md')) return
     require('./license/index')()
 }
 
 export const ensureGitignore = () => {
-    if (fs.existsSync('.gitignore')) return
+    if (fsExtra.existsSync('.gitignore')) return
     require('./gitignore/index')()
 }
 
-export const ensureTs = (...args) => {
-    if (fs.existsSync('tsconfig.json')) return
+export const ensureTs = (...args: { preset: string }[]) => {
+    if (fsExtra.existsSync('tsconfig.json')) return
     require('./ts/index')(...args)
 }
 
 export const hasVscodeFramework = async () => {
     const packageJson = await readPackageJsonFile({ dir: '.' }).catch(() => null)
-    if (packageJson) {
-        if (Object.keys({ ...packageJson.dependencies, ...packageJson.devDependencies }).includes('vscode-framework')) {
-            return true
-        }
+    if (packageJson && Object.keys({ ...packageJson.dependencies, ...packageJson.devDependencies }).includes('vscode-framework')) {
+        return true
     }
     return false
 }
